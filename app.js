@@ -11,7 +11,10 @@ import { Siega } from './models/Siega.js';
 const app = express();
 
 // Usar variável de ambiente para porta, com fallback para 55000
-const port = process.env.PORT || 55000;
+const PORT = process.env.PORT || 55000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
 
 app.use(express.json());
 app.use(cors());
