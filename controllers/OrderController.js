@@ -6,18 +6,20 @@ export const pedidoCreate = async (req, res) => {
   if (!clienteId || !produtos || !total) {
     return res.status(400).json({ msg: "Dados incompletos do pedido" });
   }
+  console.log("Produtos recebidos para o pedido:", produtos);
 
   try {
     const produtosFormatados = produtos.map((produto, index) => {
-      if (!produto.imagem) {
-        console.warn(`⚠️ Produto no índice ${index} está sem imagem:`, produto);
+      if (!produto.id) {
+        console.warn(`⚠️ Produto no índice ${index} está sem ID:`, produto);
       }
 
       return {
+        id: produto.id, // ✅ ESSENCIAL para avaliação
         produto: produto.produto,
         quantidade: produto.quantidade,
         preco: produto.preco,
-        imagem: produto.imagem || null, // garantir que sempre tenha a chave
+        imagem: produto.imagem || null,
       };
     });
 
@@ -33,6 +35,7 @@ export const pedidoCreate = async (req, res) => {
     res.status(500).json({ msg: "Erro ao registrar pedido", error });
   }
 };
+
 
 export const pedidoIndex = async (req, res) => {
   try {

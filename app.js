@@ -5,12 +5,13 @@ import routes from './routes.js';
 import { sequelize } from './databases/conecta.js';
 
 import { Cliente } from './models/Cliente.js';
-
 import { Pedido } from './models/Pedido.js';
 import { Siega } from './models/Siega.js';
 
 const app = express();
-const port = 55000;
+
+// Usar variável de ambiente para porta, com fallback para 55000
+const port = process.env.PORT || 55000;
 
 app.use(express.json());
 app.use(cors());
@@ -42,6 +43,7 @@ app.get('/', (req, res) => {
   res.send('API Projeto TCC - Lojas Siegas');
 });
 
-app.listen(port, () => {
+// Escutar em todas interfaces para aceitar conexões externas no Render
+app.listen(port, '0.0.0.0', () => {
   console.log(`Servidor Rodando na Porta: ${port}`);
 });

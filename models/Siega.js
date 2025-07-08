@@ -11,7 +11,7 @@ imagem: {
   type: DataTypes.TEXT, // aceita strings longas
 },
   descricao: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.TEXT,
     allowNull: false
   },
   produto: {

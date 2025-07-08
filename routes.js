@@ -4,7 +4,7 @@ import { clienteCreate, clienteIndex, clienteLogin } from "./controllers/cliente
 import { SiegaCreate, SiegaDestaca, SiegaDestaques, SiegaIndex, SiegaDestroy, SiegaUpdate, SiegaShow } from "./controllers/SiegaController.js";
 import { logIndex } from "./controllers/logController.js";
 import { pedidoCreate, pedidoIndex } from "./controllers/OrderController.js";
-
+import { avaliacaoCriar, avaliacaoListarPorProduto } from "./controllers/avaliacaoController.js"; // <-- IMPORTAÇÃO AQUI
 
 const router = Router();
 
@@ -22,9 +22,11 @@ router.get('/listarprodutos', SiegaIndex)
       .delete('/produto/destroy/:id', SiegaDestroy)
       .put('/alterar/:id', SiegaUpdate);
 
-      router.get('/pedidos', pedidoIndex)
+router.get('/pedidos', pedidoIndex)
       .post('/pedidos', pedidoCreate);
 
-     
+// ✅ ROTAS DE AVALIAÇÃO
+router.post('/avaliacoes', avaliacaoCriar); // Cadastrar nova avaliação
+router.get('/avaliacoes/:produtoId', avaliacaoListarPorProduto); // Listar avaliações de um produto
 
 export default router;
