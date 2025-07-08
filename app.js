@@ -10,15 +10,10 @@ import { Siega } from './models/Siega.js';
 
 const app = express();
 
-// Usar variável de ambiente para porta, com fallback para 55000
 const PORT = process.env.PORT || 55000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
 
 app.use(express.json());
 app.use(cors());
-
 app.use(routes);
 
 async function conecta_db() {
@@ -46,7 +41,7 @@ app.get('/', (req, res) => {
   res.send('API Projeto TCC - Lojas Siegas');
 });
 
-// Escutar em todas interfaces para aceitar conexões externas no Render
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Servidor Rodando na Porta: ${port}`);
+// Escuta na porta e interface 0.0.0.0 (todas interfaces)
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
